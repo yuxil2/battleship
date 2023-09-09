@@ -15,11 +15,11 @@ class UserInterface:
             print("Invalid input. Please enter a number within the specified range.")
 
     @staticmethod
-    def ask_ship_placement(ship: ShipConfig):
-        print(f"Placing {ship}. Please specify starting coordinate and orientation.")
+    def ask_ship_placement(player_id: str, ship: ShipConfig):
+        print(f"Player {player_id} - Placing {ship}. Please specify starting coordinate and orientation.")
         x = int(input("Enter starting X coordinate: "))
         y = int(input("Enter starting Y coordinate: "))
-        orientation = UserInterface.get_valid_string("Enter orientation (horizontal/vertical): ", "orientation")
+        orientation = UserInterface.get_valid_string("Enter orientation (horizontal/vertical): ", valid_choices["orientation"])
         return x, y, orientation
     
     @staticmethod
@@ -37,12 +37,12 @@ class UserInterface:
                 print("Invalid input. Please enter a positive integer.")
 
     @staticmethod
-    def get_valid_string(prompt: str, choice_key: str) -> str:
+    def get_valid_string(prompt: str, valid_choices: list) -> str:
         while True:
             response = input(prompt).lower().strip()
-            if response in valid_choices[choice_key]:
+            if response in valid_choices:
                 return response
-            print(f"Invalid choice. Please choose from: {', '.join(valid_choices[choice_key])}")
+            print(f"Invalid choice. Please choose from: {', '.join(valid_choices)}")
 
     @staticmethod
     def inform_invalid_placement():

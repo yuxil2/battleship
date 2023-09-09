@@ -43,7 +43,7 @@ class Player:
         for _, ship in self.ships.items():
             is_placed = False
             while not is_placed:
-                start_x, start_y, orientation = user_interface.ask_ship_placement(ship)
+                start_x, start_y, orientation = user_interface.ask_ship_placement(self.player_id, ship)
                 if self.board.place_ship(start_x, start_y, ship, orientation):
                     is_placed = True
                 else:
