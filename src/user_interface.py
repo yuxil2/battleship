@@ -21,6 +21,20 @@ class UserInterface:
         y = int(input("Enter starting Y coordinate: "))
         orientation = UserInterface.get_valid_string("Enter orientation (horizontal/vertical): ", "orientation")
         return x, y, orientation
+    
+    @staticmethod
+    def ask_ship_counts():
+        ship_counts = {}
+        for ship_config in ShipConfig:
+            while True:
+                try:
+                    count = int(input(f"How many {ship_config} do you want? "))
+                    if count > 0:
+                        ship_counts[ship_config] = count
+                        return ship_counts
+                except ValueError:
+                    pass
+                print("Invalid input. Please enter a positive integer.")
 
     @staticmethod
     def get_valid_string(prompt: str, choice_key: str) -> str:
