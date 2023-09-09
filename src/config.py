@@ -33,4 +33,4 @@ class ShipConfig(Enum):
         return self.value[1]
 
     def __str__(self):
-        return self.value[2]
+        return f"{self.value[2]} with shape {self.value[0]} * {self.value[1]}"
