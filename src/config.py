@@ -1,5 +1,15 @@
 from enum import Enum, unique
 
+# Board configurations
+MIN_BOARD_SIZE = 10
+MAX_BOARD_SIZE = 25
+
+# Choices for user inputs, to validate against in UserInterface.get_valid_string()
+valid_choices = {
+    'orientation': ['horizontal', 'vertical'],
+    'yes_no': ['yes', 'no'],
+}
+
 @unique
 class NodeStatus(Enum):
     EMPTY = 1
@@ -9,10 +19,10 @@ class NodeStatus(Enum):
 
 @unique
 class ShipConfig(Enum):
-    SMALL = (1, 2)
-    MEDIUM = (1, 3)
-    LARGE = (2, 3)
-    XLARGE = (2, 4)
+    BATTLESHIP = (4, 1, "Battleship")
+    CRUISER = (3, 1, "Cruiser")
+    DESTROYER = (2, 1, "Destroyer")
+    SUBMARINE = (1, 1, "Submarine")
 
     @property
     def length(self):
@@ -21,3 +31,6 @@ class ShipConfig(Enum):
     @property
     def width(self):
         return self.value[1]
+
+    def __str__(self):
+        return self.value[2]
