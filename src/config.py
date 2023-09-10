@@ -19,8 +19,8 @@ class NodeStatus(Enum):
 
 @unique
 class ShipConfig(Enum):
-    # BATTLESHIP = (4, 1, "Battleship")
-    # CRUISER = (3, 1, "Cruiser")
+    BATTLESHIP = (4, 1, "Battleship")
+    CRUISER = (3, 1, "Cruiser")
     DESTROYER = (2, 1, "Destroyer")
     SUBMARINE = (1, 1, "Submarine")
 
