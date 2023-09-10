@@ -1,10 +1,8 @@
 from src.board import Board
-from src.ship import Ship
 from src.config import ShipConfig
-from uuid import uuid4
-from typing import Dict
-
+from src.ship import Ship
 from src.user_interface import UserInterface
+
 
 class Player:
     """
@@ -16,13 +14,13 @@ class Player:
         self.board = None
 
     def __str__(self):
-        return f"Player {self.player_id} with {len(self.ships)} ships"
+        return f"Player {self.player_id} (with {len(self.ships)} ships)"
 
     def assign_board(self, board: Board):
         """Assign a board to the player."""
         self.board = board
 
-    def add_ships(self, ship_counts: Dict[ShipConfig, int]):
+    def add_ships(self, ship_counts):
         """
         Add ships to the player's fleet based on the passed config.
         :param ship_counts: A dict containing ShipConfig as key and count as value. Example: {ShipConfig.SMALL: 2}
@@ -43,12 +41,12 @@ class Player:
         for _, ship in self.ships.items():
             is_placed = False
             while not is_placed:
-                start_x, start_y, orientation = user_interface.ask_ship_placement(self.player_id, ship)
+                start_x, start_y, orientation = user_interface.ask_ship_placement(self.player_id, ship, self.board)
                 if self.board.place_ship(start_x, start_y, ship, orientation):
                     is_placed = True
                 else:
                     user_interface.inform_invalid_placement()
 
     def has_ships_left(self):
-        """Check if the player still has undamaged ships."""
-        return bool(self.ships)
+            """Check if the player still has undamaged ships."""
+            return bool(self.ships)  
