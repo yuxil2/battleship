@@ -14,7 +14,8 @@ class Ship:
         """
         Register a hit on the ship and reduce the remaining hits by 1.
         """
-        self.remaining_hits -= 1
+        if self.remaining_hits > 0:
+            self.remaining_hits -= 1
 
     def is_alive(self):
         """

@@ -30,9 +30,6 @@ class Round:
         # Main game loop
         while True:
             for player in self.players:
-                print("has ship left?")
-                print(player.player_id)
-                print(player.has_ships_left())
                 if not player.has_ships_left():
                     continue
 
@@ -40,7 +37,7 @@ class Round:
 
                 target_players = [
                     p for p in self.players
-                    if p != player and p.has_ships_left
+                    if p != player and p.has_ships_left()
                 ]
                 print("availale targets!!")
                 print([p.player_id for p in target_players])

@@ -2,7 +2,6 @@ from src.config import ShipConfig
 from src.user_interface import UserInterface
 from src.round import Round
 from src.player import Player
-from src.player import Player
 
 class Game:
     def __init__(self):
@@ -21,7 +20,7 @@ class Game:
             except ValueError:
                 print("Invalid input. Please enter a positive integer (at least 2): ")
 
-    def _ask_ship_configs(self) -> None:
+    def _ask_ship_configs(self) -> dict:
         """Ask the players for their preferred ship configuration for the game."""
         ship_configs = {}
         print("Setting up ship configurations for the game...\n")
