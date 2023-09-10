@@ -33,6 +33,7 @@ jobs:
         # stop the build if there are Python syntax errors or undefined names
         flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 game.py --count --select=E9,F63,F7,F82 --show-source --statistics
+
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 src --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
         flake8 game.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
@@ -41,4 +42,42 @@ jobs:
         pytest test
     - name: Run Game
       run: |
-        python game.py
+        echo "3"                # Input the number of players
+        echo "player1"          # Input player 1's ID
+        echo "player2"          # Input player 2's ID
+        echo "player3"          # Input player 3's ID
+        echo "1"                # Input the number of Destroyers with shape 2 * 1
+        echo "1"                # Input the number of Submarines with shape 1 * 1
+        echo "20"               # Input board height (10-25)
+        echo "20"               # Input board width (10-25)
+        echo "2"                # Input the starting X coordinate for player 1's Destroyer
+        echo "10"               # Input the starting Y coordinate for player 1's Destroyer
+        echo "vertical"         # Input the orientation for player 1's Destroyer
+        echo "19"               # Input the starting X coordinate for player 1's Submarine
+        echo "0"                # Input the starting Y coordinate for player 1's Submarine
+        echo "horizontal"       # Input the orientation for player 1's Submarine
+        echo "2"                # Input the starting X coordinate for player 2's Destroyer
+        echo "11"               # Input the starting Y coordinate for player 2's Destroyer
+        echo "vertical"         # Input the orientation for player 2's Destroyer
+        echo "8"                # Input the starting X coordinate for player 2's Submarine
+        echo "2"                # Input the starting Y coordinate for player 2's Submarine
+        echo "horizontal"       # Input the orientation for player 2's Submarine
+        echo "2"                # Input the starting X coordinate for player 3's Destroyer
+        echo "12"               # Input the starting Y coordinate for player 3's Destroyer
+        echo "vertical"         # Input the orientation for player 3's Destroyer
+        echo "8"                # Input the starting X coordinate for player 3's Submarine
+        echo "2"                # Input the starting Y coordinate for player 3's Submarine
+        echo "horizontal"       # Input the orientation for player 3's Submarine
+        echo "player1"          # Select target player for player 1
+        echo "2"                # Input the X coordinate for hitting for player 1
+        echo "11"               # Input the Y coordinate for hitting for player 1
+        echo "player2"          # Select target player for player 2
+        echo "3"                # Input the X coordinate for hitting for player 2
+        echo "12"               # Input the Y coordinate for hitting for player 2
+        echo "player3"          # Select target player for player 3
+        echo "8"                # Input the X coordinate for hitting for player 3
+        echo "2"                # Input the Y coordinate for hitting for player 3
+        echo "player2"          # Select target player for player 1
+        echo "8"                # Input the X coordinate for hitting for player 1
+        echo "2"                # Input the Y coordinate for hitting for player 1
+        echo "no"               # Choose not to play another round
