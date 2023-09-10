@@ -1,39 +1,66 @@
-from src.config import ShipConfig, valid_choices, MIN_BOARD_SIZE, MAX_BOARD_SIZE
+from src.board import Board
+from src.config import MAX_BOARD_SIZE, MIN_BOARD_SIZE, ShipConfig, valid_choices
+from src.ship import Ship
 
-class UserInterface:
-    
+class UserInterface:   
     @staticmethod
-    def ask_board_size():
+    def _ask_dimension_input(dimension_name: str) -> int:
         while True:
             try:
-                m = int(input(f"Enter board height ({MIN_BOARD_SIZE}-{MAX_BOARD_SIZE}): "))
-                n = int(input(f"Enter board width ({MIN_BOARD_SIZE}-{MAX_BOARD_SIZE}): "))
-                if MIN_BOARD_SIZE <= m <= MAX_BOARD_SIZE and MIN_BOARD_SIZE <= n <= MAX_BOARD_SIZE:
-                    return m, n
+                value = int(input(f"Enter board {dimension_name} ({MIN_BOARD_SIZE}-{MAX_BOARD_SIZE}): "))
+                if MIN_BOARD_SIZE <= value <= MAX_BOARD_SIZE:
+                    return value
+                else:
+                    print("Invalid input. Please enter a number within the specified range.")
             except ValueError:
-                pass
-            print("Invalid input. Please enter a number within the specified range.")
+                print("Invalid input. Please enter a number within the specified range.")
+                
+    @staticmethod
+    def ask_board_size():
+        m = UserInterface._ask_dimension_input("height")
+        n = UserInterface._ask_dimension_input("width")
+        return m, n
 
     @staticmethod
-    def ask_ship_placement(player_id: str, ship: ShipConfig):
-        print(f"Player {player_id} - Placing {ship}. Please specify starting coordinate and orientation.")
-        x = int(input("Enter starting X coordinate: "))
-        y = int(input("Enter starting Y coordinate: "))
+    def _ask_coordinate_input(coordinate_name: str, max_value: int, action: str) -> int:
+        """Ask the user for a coordinate input and ensure it's valid."""
+        while True:
+            try:
+                prompt_msg = f"Enter {coordinate_name} coordinate for {action} (0-{max_value - 1}): "
+                coord = int(input(prompt_msg))
+                if 0 <= coord < max_value:
+                    return coord
+                else:
+                    print(f"Invalid {coordinate_name} coordinate. Please enter a number between 0 and {max_value - 1}.")
+            except ValueError:
+                print(f"Invalid input. Please enter a valid integer for {coordinate_name} coordinate.")
+
+    @staticmethod
+    def ask_ship_placement(player_id: str, ship: Ship, board: Board):
+        print(f"\nPlayer {player_id} - Placing {ship.config}. Please specify starting coordinate and orientation.")  
+        x = UserInterface._ask_coordinate_input("X", board.m, "placing")
+        y = UserInterface._ask_coordinate_input("Y", board.n, "placing")   
         orientation = UserInterface.get_valid_string("Enter orientation (horizontal/vertical): ", valid_choices["orientation"])
         return x, y, orientation
-    
+
     @staticmethod
     def ask_ship_counts():
         ship_counts = {}
         for ship_config in ShipConfig:
-            while True:
-                try:
-                    count = int(input(f"How many {ship_config} do you want? "))
-                    if count > 0:
-                        ship_counts[ship_config] = count
-                        return ship_counts
-                except ValueError:
-                    pass
+            count = ShipConfig.get_valid_count_input(f"How many {ship_config} do you want? ")
+            ship_counts[ship_config] = count
+        return ship_counts
+    
+    @staticmethod
+    def get_valid_count_input(prompt):
+        while True:
+            try:
+                count = int(input(prompt))
+                if count > 0:
+                    return count
+                else:
+                    print("Invalid input. Please enter a positive integer.")
+            except ValueError:
                 print("Invalid input. Please enter a positive integer.")
 
     @staticmethod
@@ -47,3 +74,33 @@ class UserInterface:
     @staticmethod
     def inform_invalid_placement():
         print("Invalid placement. Please try again.")
+
+    @staticmethod
+    def ask_target_for_hit(player_id: str, target_players: list()):
+        player_ids = [p.player_id for p in target_players]
+        print(f"Player {player_id}, choose your target!")
+        print("Available targets: ", ', '.join(player_ids))
+        target_id = UserInterface.get_valid_string("\nSelect target player_id: ", player_ids)
+        return next(p for p in target_players if p.player_id == target_id)
+    
+    @staticmethod
+    def ask_coordinates_for_hit(board: Board):
+        x = UserInterface._ask_coordinate_input("X", board.m, action="hitting")
+        y = UserInterface._ask_coordinate_input("Y", board.n, action="hitting")
+        return x, y
+
+    @staticmethod
+    def show_empty_hit():
+        print("\nMissed!\n")
+
+    @staticmethod
+    def show_hit_ship():
+        print("\nHit!\n")
+
+    @staticmethod
+    def show_ship_destroyed(ship: Ship):
+        print(f"\nHit! {ship.config} is destroyed!\n")
+
+    @staticmethod
+    def show_winner(player):
+        print(f"\nCongratulations {player}! You've won this round!\n")
