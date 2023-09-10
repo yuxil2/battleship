@@ -41,7 +41,11 @@ jobs:
       run: |
         pytest test
     - name: Run Game
+<<<<<<< HEAD
       run: |    
+=======
+      run: |
+>>>>>>> 3adc7828e34345a953ab8b656a4e24046b2d46df
         echo "3"                # Input the number of players
         echo "player1"          # Input player 1's ID
         echo "player2"          # Input player 2's ID
