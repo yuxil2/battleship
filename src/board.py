@@ -1,10 +1,11 @@
-from src.node import Node
 from src.config import NodeStatus
+from src.node import Node
 from src.ship import Ship
+
 
 class Board:
     def __init__(self, m, n):
-        self.grid = [[Node() for _ in range(n)] for _ in range(m)]
+        self.grid = [[Node() for _ in range(n)] for _ in range(m)] # m * n
         self.m = m
         self.n = n
 
@@ -34,7 +35,7 @@ class Board:
         """
         if not self.is_valid_position(x, y):
             return False
-        return self.grid[y][x].status == NodeStatus.EMPTY
+        return self.grid[x][y].status == NodeStatus.EMPTY
 
     def is_valid_hit(self, x, y):
         """
@@ -49,7 +50,7 @@ class Board:
         """
         if not self.is_valid_position(x, y):
             return False
-        return self.grid[y][x].status in [NodeStatus.EMPTY, NodeStatus.OCCUPIED]
+        return self.grid[x][y].status in [NodeStatus.EMPTY, NodeStatus.OCCUPIED]
     
     def place_ship(self, start_x: int, start_y: int, ship: Ship, orientation: str) -> bool:
         """
@@ -65,10 +66,10 @@ class Board:
         """
         end_x, end_y = start_x, start_y
 
-        if orientation == "horizontal":
-            end_x += ship.config.length - 1
+        if orientation == "horizontal": # all ships has width 1
+            end_y += ship.config.length - 1
         elif orientation == "vertical":
-            end_y += ship.config.width - 1
+            end_x += ship.config.length - 1
 
         if not (self.is_valid_position(start_x, start_y) and self.is_valid_position(end_x, end_y)):
             return False
@@ -77,14 +78,14 @@ class Board:
 
         if orientation == "horizontal":
             for i in range(ship.config.length):
-                if not self.is_node_empty(start_x + i, start_y):
-                    return False
-                nodes_to_place.append((start_x + i, start_y))
-        else:
-            for i in range(ship.config.width):
                 if not self.is_node_empty(start_x, start_y + i):
                     return False
                 nodes_to_place.append((start_x, start_y + i))
+        else:
+            for i in range(ship.config.length):
+                if not self.is_node_empty(start_x + i, start_y):
+                    return False
+                nodes_to_place.append((start_x + i, start_y))
 
         # If all checks passed, place the ship
         for x, y in nodes_to_place:
