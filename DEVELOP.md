@@ -1,4 +1,4 @@
-# Detailed Battleship Game Design Documentation
+# Battleship Game Design Documentation
 
 ## Objective
 
