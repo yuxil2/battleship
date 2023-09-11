@@ -1,6 +1,9 @@
-# Battleship Game[🚢](https://emojipedia.org/zh/%E8%88%B9/)
+# Battleship Game🚢
 
 You and your opponents are competing navy commanders at sea. You have a fleet of ships positioned at secret coordinates and take turns firing torpedoes at each other. The goal is to be the last to survive while sinking other person’s whole fleet.
+
+## Development Guide
+Interested in contributing or diving deeper into the design? Check out [DEVELOP.md](https://github.com/yuxil2/battleship/blob/main/DEVELOP.md) for a comprehensive overview of the object-oriented design, as well as guidelines for extending this project.
 
 ## Getting Started
 
@@ -12,7 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installation
 
-1. Clone the repository:
+Clone the repository:
 
    ```sh
    git clone https://github.com/yuxil2/battleship.git
@@ -30,15 +33,7 @@ These instructions will get you a copy of the project up and running on your loc
 	python game.py
 ```
 
-## How to Play
-
-* Each player will start by positioning their ships on their board.
-* Players will then take turns choosing a target coordinate on the opponent's board to attack.
-* The game will notify players if their hit was successful, missed, or sank an opponent's ship.
-* The game ends when all the ships of a player are sunk, declaring the other player the winner.
-* For detailed game rules, refer to the Game Design Documentation.
-
-For detailed game rules, refer to the [Game Design Documentation](https://chat.openDesign documentation.mdai.com/c/link_to_documentation_if_available).
+## Game Flow 
 
 ## Features
 
@@ -46,14 +41,11 @@ For detailed game rules, refer to the [Game Design Documentation](https://chat.o
 * Dynamic board sizes and ship configurations.
 * Engaging gameplay with hits, misses, and sunk notifications.
 
-## Game Flow
 
-* Initialization: Define configurations, instantiate players, and initiate a game round.
-* Setup Phase: Decide board dimensions, add ships to fleets, and position ships on the board.
-* Combat Phase: Players take turns, select targets, and register hits or misses.
-* Endgame Phase: Declare the winner and provide an option to play another round.
+### How to Play
 
-## Future Improvements
-
-* GUI Integration: Implement a graphical user interface.
-* Scoring System: Add a scoring mechanism for multi-round games.
+* Game Initialization: players have the options to define game configurations, instantiate players, and initiate a game round.
+* Round Setup Phase: Entering a round, questions will be asked to decide board dimensions and add ships to fleets; Each player will need to position all ships on the board.
+each player will start by positioning their ships on their board.
+* Combat Phase: Players will then take turns choosing a target coordinate on the selected opponent's board to attack. The game will notify players if their hit was successful, missed, or sank an opponent's ship.
+* Endgame Phase: The game concludes when only one player has unsunk ships, crowning them the winner.

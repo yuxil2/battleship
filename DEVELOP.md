@@ -2,24 +2,37 @@
 
 ## Objective
 
-Implement a simplified version of the Battleship game, allowing two players to engage in a strategic naval combat scenario. The game is text-based, with players placing ships on their boards and taking turns to target and sink their opponent's ships.
+Implement a creative version of the Battleship game, allowing multiple players to engage in a strategic naval combat scenario. The game is text-based, with players placing ships on their boards and taking turns to target and sink their opponent's ships.
+
+## Tech Stack
+* Language: This project is primarily developed in Python, leveraging its simplicity and extensive libraries for quick and efficient game development.
+* User Interface: A text-based interface ensures easy interaction and engagement. Input prompts guide players through game setup and turns, with clear feedback on game outcomes.
+* Testing: Unit Testing is implemented for validating the correctness of small, isolated pieces of functionality within the game. Integration Testing is implemented for ensuring that different components of the game (e.g., ship placement, combat mechanics, game state management) work seamlessly together as intended.
+* Version Control: GitHub is used for code hosting and versioning. Facilitates contributions and ongoing development.
+
+## Contribution Process
+* For new feature development, please ensure code adheres to the project's current coding style.
+* Before committing, run flake8 to ensure your code conforms to the project's style guidelines.
+* Make sure to write unit tests for your new features, covering the main functionality. Utilize the pytest framework for testing.
+* Once you push, GitHub Actions (if integrated in the project) will automatically start running the tests.
+
 
 ## Components
 
-### Configurations
+### Configurations (config.py)
 
 - **MIN_BOARD_SIZE**: Minimum allowable dimension of the board. Ensures that the board has a reasonable size to place ships.
 - **MAX_BOARD_SIZE**: Maximum allowable dimension of the board. Restricts the board from being overly large, making gameplay manageable.
 - **valid_choices**: A dictionary that defines valid input choices for various scenarios like ship orientation (horizontal/vertical).
 
-### NodeStatus Enum
+### NodeStatus Enum (config.py)
 
 - **EMPTY**: Node has no ship.
 - **OCCUPIED**: Node contains part of a ship.
 - **HITTED_EMPTY**: An empty node that's been targeted and hit.
 - **HITTED_OCCUPIED**: A node containing a ship that's been hit.
 
-### ShipConfig Enum
+### ShipConfig Enum (config.py)
 
 Describes different ship types. Each type has:
 
@@ -27,7 +40,7 @@ Describes different ship types. Each type has:
 - **width**: Represents the width of the ship (usually 1, as ships are often 1 cell wide).
 - **name**: A friendly descriptor of the ship's size/type (e.g., "small").
 
-### Node
+### Node (node.py)
 
 Represents a cell on the board.
 
@@ -36,7 +49,7 @@ Represents a cell on the board.
 - **status**: Enum value indicating the node's status.
 - **ship_id**: Holds the ship's ID if the node is occupied by a ship, or None if it's empty.
 
-### Player
+### Player (player.py)
 
 Represents a participant.
 
@@ -54,7 +67,7 @@ Represents a participant.
 - **place_ships**: Places the ships on the board.
 - **has_ships_left**: Checks if any ships are still intact.
 
-### Round
+### Round (round.py)
 
 Represents a single round/session.
 
@@ -71,7 +84,7 @@ Represents a single round/session.
 - **play**: The main gameplay loop, where players take turns targeting opponents.
 - **reset**: Resets the game state for a new round.
 
-### Ship
+### Ship (ship.py)
 
 Represents ships that players deploy.
 
@@ -87,7 +100,7 @@ Represents ships that players deploy.
 - **hit**: Registers a hit on the ship.
 - **is_alive**: Checks if the ship is still afloat.
 
-### UserInterface
+### UserInterface (user_interface.py)
 
 Text-based interface for user interaction.
 
@@ -106,38 +119,8 @@ Text-based interface for user interaction.
 - **show_ship_destroyed**: Shows a ship has been sunk.
 - **show_winner**: Declares the winner of the round.
 
-## Game Flow
-
-### Initialization
-
-- Define configurations.
-- Instantiate players.
-- Initiate a game round.
-
-### Setup Phase
-
-- Decide board dimensions.
-- Players add ships to their fleets.
-- Players position their ships on the board.
-
-### Combat Phase
-
-- Players take turns.
-- Select an opponent.
-- Choose a target coordinate.
-- Register hits or misses.
-- Check for sunk ships.
-- Update game state and provide feedback.
-
-### Endgame Phase
-
-- Declare the winner.
-- Option to reset and play another round.
-
 ## Future Improvements
 
-- **Extended Multiplayer**: Enable more than two players.
-- **AI Player**: Introduce computer opponents with varied difficulty levels.
 - **Enhanced Error Handling**: More robust error checks for all user inputs.
 - **GUI Integration**: Implement a graphical user interface.
-- **Scoring System**: Implement a scoring mechanism for multi-round games.
+- **AI Player**: Introduce computer opponents with varied difficulty levels.
