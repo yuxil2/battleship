@@ -2,11 +2,17 @@ from src.round import Round
 from src.player import Player
 from src.config import ShipConfig
 
+"""
+Unit tests for the Round class.
+It tests the methods of the Round class in isolation.
+"""
 
 def mock_ask_board_size(_):
+    # Mock the board size
     return 10, 10
 
 def mock_input_for_coordinates(prompt):
+    # Mock the user input for coordinates
     if "X" in prompt:
         return "0"
     elif "Y" in prompt:
@@ -17,12 +23,12 @@ def mock_input_for_coordinates(prompt):
         raise ValueError("Unexpected prompt")
 
 def mock_ask_ship_placement(_, player_id, ship, board):
+    # Mock the user input for ship placement
     return 0, 1, "horizontal"
 
-
 def mock_ask_ship_counts():
+    # Mock the user input for ship counts
     return {ShipConfig.BATTLESHIP: 1}
-
 
 def test_round_initialization(monkeypatch):
     # Mock user interactions

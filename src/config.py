@@ -10,6 +10,14 @@ valid_choices = {
     'yes_no': ['yes', 'no'],
 }
 
+"""
+Status of a node on the board.
+
+EMPTY: the node is empty.
+OCCUPIED: the node is occupied by a ship.
+HITTED_EMPTY: the node is empty and has been hit.
+HITTED_OCCUPIED: the node is occupied by a ship and has been hit.
+"""
 @unique
 class NodeStatus(Enum):
     EMPTY = 1
@@ -17,6 +25,14 @@ class NodeStatus(Enum):
     HITTED_EMPTY = 3
     HITTED_OCCUPIED = 4
 
+"""
+Type of a ship.
+
+BATTLESHIP: length 4, width 1.
+CRUISER: length 3, width 1.
+DESTROYER: length 2, width 1.
+SUBMARINE: length 1, width 1.
+"""
 @unique
 class ShipConfig(Enum):
     BATTLESHIP = (4, 1, "Battleship")

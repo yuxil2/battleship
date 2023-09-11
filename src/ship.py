@@ -5,6 +5,9 @@ class Ship:
     Represents a ship in the game with functionalities for tracking hits and checks if it's destroyed.
     """
     def __init__(self, ship_id, player_id, config: ShipConfig):
+        """
+        Initialize a ship with a ship ID, player ID, config, and remaining hits.
+        """
         self.ship_id = ship_id
         self.player_id = player_id
         self.config = config
