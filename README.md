@@ -17,20 +17,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 Clone the repository:
 
-   ```sh
-   git clone https://github.com/yuxil2/battleship.git
-   ```
+```sh
+git clone https://github.com/yuxil2/battleship.git
+```
 
 ### Navigate to the game directory:
 
 ```sh
-	cd battlegame
+cd battlegame
 ```
 
 ### Run the game:
 
 ```sh
-	python game.py
+python game.py
 ```
 
 ## Game Flow 
