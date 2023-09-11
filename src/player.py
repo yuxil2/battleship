@@ -8,7 +8,7 @@ class Player:
     """
     Represents a player in the game.
     """
-    def __init__(self, player_id: int):
+    def __init__(self, player_id):
         self.player_id = player_id
         self.ships = {}  # {ship_id: Ship object}
         self.board = None

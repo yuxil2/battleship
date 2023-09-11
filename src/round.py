@@ -33,14 +33,10 @@ class Round:
                 if not player.has_ships_left():
                     continue
 
-                print(f"\n{player}'s turn to hit!")
-
                 target_players = [
                     p for p in self.players
                     if p != player and p.has_ships_left()
                 ]
-                print("availale targets!!")
-                print([p.player_id for p in target_players])
                 
                 is_finshed_hit = False
                 while not is_finshed_hit:
