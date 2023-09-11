@@ -22,6 +22,7 @@ def test_add_ships():
     player.add_ships({ShipConfig.BATTLESHIP: 1})
     assert len(player.ships) == 1
     for ship_id, ship in player.ships.items():
+        assert ship_id == f"{player.player_id}_{ShipConfig.BATTLESHIP.name}_0"
         assert isinstance(ship, Ship)
 
 def test_remove_ship():
