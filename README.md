@@ -25,7 +25,7 @@ git clone https://github.com/yuxil2/battleship.git
 ### Navigate to the game directory:
 
 ```sh
-cd battlegame
+cd battleship
 ```
 
 ### Run the game:
