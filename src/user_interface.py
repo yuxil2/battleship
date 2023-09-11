@@ -2,7 +2,12 @@ from src.board import Board
 from src.config import MAX_BOARD_SIZE, MIN_BOARD_SIZE, ShipConfig, valid_choices
 from src.ship import Ship
 
-class UserInterface:   
+class UserInterface: 
+    @staticmethod
+    def inform_round_number(round_num: int):
+        """Inform the user about the round number."""
+        print(f"\n*** Round {round_num} ***\n")
+
     @staticmethod
     def _ask_dimension_input(dimension_name: str) -> int:
         while True:
@@ -104,3 +109,47 @@ class UserInterface:
     @staticmethod
     def show_winner(player):
         print(f"\nCongratulations {player}! You've won this round!\n")
+
+    @staticmethod
+    def _ask_num_players() -> int:
+        while True:
+            try:
+                num = int(input("Enter the number of players (at least 2): "))
+                if num > 1:
+                    return num
+                else:
+                    raise ValueError
+            except ValueError:
+                print("Invalid input. Please enter a positive integer (at least 2): ")
+
+    @staticmethod
+    def _ask_ship_configs() -> dict:
+        """Ask the players for their preferred ship configuration for the game."""
+        ship_configs = {}
+        print("Setting up ship configurations for the game...\n")
+        for ship_config in ShipConfig:
+            count = UserInterface.get_valid_count_input(f"How many {ship_config} do you want? ")
+            ship_configs[ship_config] = count
+        return ship_configs
+    
+    @staticmethod
+    def _ask_continue_game() -> bool:
+        """Ask the players if they want to continue the game."""
+        while True:
+            continue_game = input("Do you want to play another round? (yes/no) ")
+            if continue_game.lower() in ['yes', 'no']:
+                return continue_game.lower() == 'yes'
+            print("Invalid input. Please answer with 'yes' or 'no'.")
+
+    @staticmethod
+    def get_player_id(i, existing_ids):
+        while True:
+            player_id = input(f"Enter ID for player {i}: ")
+            if player_id not in existing_ids:
+                return player_id
+            else:
+                print("This ID is already taken. Please choose another ID.")
+
+    @staticmethod
+    def show_game_over():
+        print("\n*** Game over! Thanks for playing! :) ***\n")
